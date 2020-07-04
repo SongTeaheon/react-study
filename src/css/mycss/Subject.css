@@ -1,0 +1,6 @@
+.jumbotron {
+    background-image: url('images/image1.jpeg');
+    background-size: contain;
+    text-shadow: black 0.2em 0.2em 0.2em;
+    color: white;
+}
