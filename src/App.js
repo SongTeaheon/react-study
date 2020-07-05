@@ -5,6 +5,8 @@ import './css/bootstrap.min.css';
 import Subject from './components/Subject.js';
 import Body from './components/Body.js';
 import Footer from './components/Footer.js';
+import Home from './components/Home.js';
+import {Route, Switch} from 'react-router-dom';
 
 
 
@@ -22,7 +24,11 @@ class App extends Component{
     return (
       <div className="App">
         <Subject/>
-        <Body/>
+        <Switch>
+          <Route path="/home"><Home/></Route>
+          <Route exact path="/"><Body/></Route>
+          <Route path="/">Not Found</Route>
+        </Switch>
         <Footer/>
       </div>
     );
