@@ -5,18 +5,27 @@ import BoardPagination from './BoardPagination';
 
 
 class Body extends Component {
+    state = {
+        selected_category : 0
+    };
+
+    selCategory = (ctgNo) => {
+        this.setState({
+            selected_category : ctgNo
+        });
+    };
     render() {
         return (
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <LeftNav/>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-3">
+                        <LeftNav onClickCtg={this.selCategory}/>
                     </div>
-                    <div class="col-md-9">
+                    <div className="col-md-9">
                         <div>
-                            <h5 class="card-title">Card title</h5>
+                            <h5 className="card-title">Card title</h5>
                         </div>
-                        <ContentsList/>
+                        <ContentsList categoryNo = {this.state.selected_category}/>
                         <BoardPagination/>
                     </div>
                 </div>

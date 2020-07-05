@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
+import { callExpression } from '@babel/types';
 
 class LeftNav extends Component {
-  render() {
-    return (
-        <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">전체</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">일상</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">질문</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">모집</a>
-        </li>
-    </ul>
-    );
-  }
+    render() {
+        var categoryNm = ['전체', '일상', '질문', '모집'];
+
+        return (
+            <ul className="nav flex-column">
+                {categoryNm.map((nm, index) =>
+                    <li className="nav-item">
+                        <a className="nav-link active" onClick={function (e) {
+                            e.preventDefault();
+                            this.props.onClickCtg(index);
+                        }.bind(this)}>{nm}</a>
+                    </li>)}
+            </ul>
+        );
+    }
 }
 
 export default LeftNav;
