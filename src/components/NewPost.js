@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -34,7 +35,7 @@ class NewPost extends Component {
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                // this.props.history.push("/posts/list");
+                this.props.history.push("/posts/list");
             })
     };
 
@@ -53,4 +54,4 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+export default withRouter(NewPost);
