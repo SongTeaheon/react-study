@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { callExpression } from '@babel/types';
-
+import {NavLink} from 'react-router-dom';
 class LeftNav extends Component {
     render() {
         var categoryNm = ['전체', '일상', '질문', '모집'];
@@ -8,11 +7,10 @@ class LeftNav extends Component {
         return (
             <ul className="nav flex-column">
                 {categoryNm.map((nm, index) =>
-                    <li className="nav-item">
-                        <a className="nav-link active" onClick={function (e) {
-                            e.preventDefault();
+                    <li className="nav-item" key={index}>
+                        <NavLink to="/posts/list" role="button" onClick={function (e) {
                             this.props.onClickCtg(index);
-                        }.bind(this)}>{nm}</a>
+                        }.bind(this)}>{nm}</NavLink>
                     </li>)}
             </ul>
         );
