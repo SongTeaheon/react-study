@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 
 class BoardList extends Component {
-
+    
     render() {
         return (
             <div className="col-md-9">

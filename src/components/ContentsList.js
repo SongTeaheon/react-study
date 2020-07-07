@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { thisTypeAnnotation } from '@babel/types';
 
 class ContentsList extends Component {
+    moveDetail = (postNo) => {
 
+    };
     render() {
         return (
             <div id="app">
@@ -17,9 +19,9 @@ class ContentsList extends Component {
                     </thead>
                     <tbody>
                         {this.props.posts.map(post=>
-                        <tr key={post.postNo}>
+                        <tr key={post.postNo} onClick={this.moveDetail(post.postNo)}>
                             <th scope="row">{post.postNo}</th>
-                            <td>{post.title}</td>
+                            <td><a href={"/posts/"+post.postNo}>{post.title}</a></td>
                             <td>{post.writer}</td>
                             <td>{post.regTs}</td>
                         </tr>)}
