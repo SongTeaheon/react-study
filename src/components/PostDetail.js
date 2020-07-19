@@ -7,18 +7,27 @@ import { withRouter } from 'react-router-dom';
 
 class PostDetail extends Component {
     state = {
-        post: {
-
+        post: {},
+        headers : {
+            authorization : localStorage.getItem('authorization')
         }
     };
 
     inqSinglePostData = () => {
-        axios.get('http://localhost:8090/posts/' + this.props.match.params.id)
+
+        axios.get('http://localhost:8090/posts/' + this.props.match.params.id, {
+            headers: this.state.headers
+        })
             .then(res => {
                 console.log(res);
                 this.setState({
                     post: res.data
                 });
+            })
+            .catch(error => {
+                console.log(error);
+                alert('로그인이 필요합니다.');
+                this.props.history.push("/users/login");
             });
     };
 

@@ -23,12 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <Subject />
-        <Switch>
-          <Route path="/posts"><Body /></Route>
-          <Route path="/">Not Found</Route>
-        </Switch>
-
-
+        <Body />
         <Footer />
       </div>
     );

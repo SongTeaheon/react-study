@@ -6,6 +6,10 @@ import { withRouter } from 'react-router-dom';
 
 
 class NewPost extends Component {
+    constructor(props){
+        super(props);
+    }
+
     state = {
         post: {
             postNo: '',
