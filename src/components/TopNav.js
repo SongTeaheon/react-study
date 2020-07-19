@@ -8,6 +8,7 @@ class TopNav extends Component {
     if(localStorage.getItem('authorization')){
       alert('로그아웃 합니다.');
       localStorage.removeItem('authorization');
+      localStorage.removeItem('userId');
       this.props.history.push("/posts/list/0");
     }else{
       alert('이미 로그아웃된 상태입니다.');

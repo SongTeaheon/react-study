@@ -38,6 +38,7 @@ class Login extends Component {
             .then(res => {
                 console.log(res.headers.authorization);
                 localStorage.setItem("authorization", res.headers.authorization);
+                localStorage.setItem("userId", this.state.userId);
                 this.props.history.push("/posts/list/0");
         }).catch(error => {
             console.log(error);

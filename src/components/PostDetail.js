@@ -32,7 +32,13 @@ class PostDetail extends Component {
     };
 
     removePost = () => {
-        axios.delete('http://localhost:8090/posts/' + this.props.match.params.id)
+        if(this.state.post.writer != localStorage.getItem('userId')) {
+            alert('작성자만 삭제할 수 있습니다.');
+            return;
+        }
+        axios.delete('http://localhost:8090/posts/' + this.props.match.params.id, {
+            headers: {Authorization : localStorage.getItem('authorization')}
+        })
             .then(res => {
                 console.log(res);
                 this.props.onDeleteComple(0);
@@ -41,6 +47,11 @@ class PostDetail extends Component {
     }
 
     updatePost = () => {
+        if(this.state.post.writer != localStorage.getItem('userId')) {
+            alert('작성자만 수정할 수 있습니다.');
+            return;
+        }
+
         this.props.history.push(
             {
                 pathname: "/posts/"+this.props.match.params.id + "/mod",
@@ -69,10 +80,12 @@ class PostDetail extends Component {
                         {this.state.post.cont}
                     </p>
                 </div>
+                {this.state.post.writer == localStorage.getItem('userId') &&
                 <p>
                     <Button onClick={this.removePost} variant="secondary" style={{ 'float': 'right' }}>삭제</Button>
                     <Button onClick={this.updatePost} variant="secondary" style={{ 'float': 'right' }}>수정</Button>
                 </p>
+                }
             </div>
         );
     }

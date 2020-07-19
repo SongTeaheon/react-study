@@ -54,10 +54,14 @@ class NewPost extends Component {
     savPost = () => {
 
         if (this.props.mod == "insert") {
-            axios.post('http://localhost:8090/posts/new', {
-                "title": this.state.title,
-                "cont": this.state.cont,
-                "writer": this.state.writer
+            var data = {
+                title : this.state.post.title,
+                cont: this.state.post.cont,
+                writer: localStorage.getItem('userId')
+            };
+            console.log(data);
+            axios.post('http://localhost:8090/posts/new', data, {
+                headers: {Authorization : localStorage.getItem('authorization')}
             })
                 .then(res => {
                     console.log(res);
@@ -65,6 +69,10 @@ class NewPost extends Component {
                     this.props.history.push("/posts/" + res.data.postNo);
                 })
         } else if (this.props.mod == "update") {
+            if(this.state.post.writer != localStorage.getItem('userId')) {
+                alert('작성자만 수정할 수 있습니다.');
+                return;
+            }
             console.log('update');
             console.log(this.state.post);
             var post = this.state.post;
@@ -78,6 +86,9 @@ class NewPost extends Component {
                 "likeCnt": post.likeCnt,
                 "commentCnt": post.commentCnt,
                 "viewCnt": post.viewCnt
+            }
+            , {
+                headers: {Authorization : localStorage.getItem('authorization')}
             })
                 .then(res => {
                     console.log(res);
