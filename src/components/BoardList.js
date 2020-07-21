@@ -16,7 +16,8 @@ class BoardList extends Component {
         pager: {
             pageSize: 5,
             pageNum: 1
-        }
+        },
+        totalCnt : 0
     }
 
     componentDidUpdate(prevProps) {
@@ -44,7 +45,8 @@ class BoardList extends Component {
             .then(res => {
                 console.log(res);
                 this.setState({
-                    posts: res.data
+                    posts: res.data,
+                    totalCnt: res.headers.total_cnt
                 });
             });
     };
@@ -66,7 +68,7 @@ class BoardList extends Component {
                 </div>
                 <ContentsList posts={this.state.posts} />
                 <p><Button href="/posts/new" variant="secondary" style={{ 'float': 'right' }}>글쓰기</Button></p>
-                <BoardPagination onChangePage={this.changePage} />
+                <BoardPagination onChangePage={this.changePage} totalCnt = {this.state.totalCnt} pageSize = {this.state.pager.pageSize}/>
             </div>
 
         );

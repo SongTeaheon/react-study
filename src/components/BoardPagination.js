@@ -6,16 +6,26 @@ class BoardPagination extends Component {
         super(props); 
     }
 
+    state = {
+        pageNow : 1
+    };
+    
+
     clickNum = (i)=> {
         console.log('click nnum', i);
+        this.setState({
+            pageNow : i
+        });
         this.props.onChangePage(i);
+        
     };
 
     render() {
         var items = [];
-        for (let index = 1; index <= 5; index++) {
+        var pageCnt = Math.ceil(this.props.totalCnt/this.props.pageSize);
+        for (let index = 1; index <= pageCnt; index++) {
             items.push(
-                <Pagination.Item key={index} active={index === 1}  onClick={() => this.clickNum(index)} >
+                <Pagination.Item key={index} active={this.state.pageNow === index}  onClick={() => this.clickNum(index)} >
                     {index}
                 </Pagination.Item>
             )
