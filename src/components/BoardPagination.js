@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
+import { Pagination } from 'react-bootstrap';
 
 class BoardPagination extends Component {
+    constructor(props) {
+        super(props); 
+    }
+
+    clickNum = (i)=> {
+        console.log('click nnum', i);
+        this.props.onChangePage(i);
+    };
+
     render() {
+        var items = [];
+        for (let index = 1; index <= 5; index++) {
+            items.push(
+                <Pagination.Item key={index} active={index === 1}  onClick={() => this.clickNum(index)} >
+                    {index}
+                </Pagination.Item>
+            )
+        }
         return (
-            <div className="mx-auto" style={{ 'width': '200px' }}>
-                <nav aria-label="...">
-                    <ul className="pagination">
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#" tabIndex="-1">Previous</a>
-                        </li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item active">
-                            <a className="page-link" href="#">2 <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+            <div>
+                <Pagination>{items}</Pagination>
             </div>
         );
     }

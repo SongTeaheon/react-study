@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import { thisTypeAnnotation } from '@babel/types';
 
 class ContentsList extends Component {
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('ContentsList getSnapshotBeforeUpdate');
+        return null;
+    }
+    shouldComponentUpdate(nextProps) {
+        return nextProps.posts !== this.props.posts;
+    }
     moveDetail = (postNo) => {
 
     };
     render() {
+        
         return (
             <div id="app">
                 <table className="table">
